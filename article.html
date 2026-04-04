@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>健康文章內容頁</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="article.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#article-main">跳到文章內容</a>
+
+    <header class="site-header">
+      <div class="utility-bar">
+        <div class="container utility-content">
+          <p>會員專屬延伸內容</p>
+          <div class="utility-actions" aria-label="會員入口">
+            <button type="button" class="text-button">登入</button>
+            <button type="button" class="text-button">升級會員</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container header-main">
+        <a class="logo" href="index.html" aria-label="回首頁">Health Daily</a>
+
+        <form class="search-form" role="search" aria-label="站內搜尋">
+          <label class="visually-hidden" for="articleSearch">搜尋主題</label>
+          <input id="articleSearch" type="search" placeholder="搜尋其他文章" />
+          <button type="submit" class="primary-button">搜尋</button>
+        </form>
+
+        <a class="primary-button" href="index.html">回首頁</a>
+      </div>
+    </header>
+
+    <main id="article-main" class="container article-layout">
+      <article class="article-shell" aria-labelledby="articleTitle">
+        <p class="card-badge">健康生活</p>
+        <h1 id="articleTitle" class="article-title">文章標題載入中</h1>
+
+        <div class="article-meta">
+          <span>作者：編輯團隊</span>
+          <time datetime="2026-04-04">2026-04-04</time>
+        </div>
+
+        <p class="article-lead">
+          這是一篇示意文章頁，完整重現首頁的內容語氣與版面風格，並以「前半公開、後半付費」作為會員內容體驗。
+        </p>
+
+        <section class="article-body" aria-label="公開內容">
+          <p>現代人容易忽略健康管理中的連續性，常見情境是短期衝刺、長期中斷。若希望讓習慣真正變成身體的支持系統，必須先建立低摩擦、可重複的日常節奏，而不是追求一次到位的完美計畫。</p>
+          <p>第一步是釐清自己的生活限制，例如通勤時間、工作型態、家庭照護責任。把可執行條件寫下來後，再選擇最小可行行動：每天 10 分鐘伸展、每餐多一份蔬菜、固定上床時間等，讓行為能穩定落地。</p>
+          <p>第二步是建立可被追蹤的指標。你不需要同時監控太多項目，只要先追一個最關鍵數據，例如睡眠時長、每週活動次數，或餐後精神狀態評分。當指標可見，調整才會有方向。</p>
+        </section>
+
+        <section class="paywall" aria-labelledby="paywallTitle">
+          <h2 id="paywallTitle">後半篇內容需要付費解鎖</h2>
+          <p>解鎖後可閱讀完整策略、進階菜單範例與 7 天健康行動模板。</p>
+
+          <div class="paywall-panel">
+            <div>
+              <p class="paywall-price">會員方案：每月 NT$99</p>
+              <p class="paywall-note">解鎖所有付費文章與會員專欄。</p>
+            </div>
+            <button id="unlockButton" type="button" class="primary-button">前往付款解鎖</button>
+          </div>
+
+          <div id="lockedContent" class="locked-content" data-locked="true" aria-live="polite">
+            <p>第三步是讓回饋機制更即時。你可以在每晚花 1 分鐘記錄：今天是否完成最低行動？如果沒有，阻礙是什麼？下次如何降低阻礙？這個迴圈比單純追求意志力更有效。</p>
+            <p>進階做法是搭配「情境腳本」，例如「午休後若覺得疲倦，先喝水並走 5 分鐘，再決定是否喝咖啡」。透過條件式決策，你會更容易在忙碌中做出健康選擇。</p>
+            <p>飲食方面建議以盤面比例來簡化決策：1/2 蔬菜、1/4 蛋白質、1/4 全穀類。這個方法不需要精密計算，也能在多數外食情境下維持相對穩定的能量與飽足。</p>
+            <p>最後，別忽略恢復。規律睡眠、輕度活動與壓力管理是讓健康策略持續的底層能力。當你把恢復視為必要投資，而不是可有可無的選項，長期成效會更明顯。</p>
+          </div>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

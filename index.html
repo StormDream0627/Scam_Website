@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>健康內容首頁 Wireframe Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要內容</a>
+
+    <header class="site-header" id="top">
+      <div class="utility-bar">
+        <div class="container utility-content">
+          <p>每日健康內容精選</p>
+          <div class="utility-actions" aria-label="快速入口">
+            <button type="button" class="text-button">登入</button>
+            <button type="button" class="text-button">註冊</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container header-main">
+        <a class="logo" href="index.html" aria-label="首頁">Health Daily</a>
+
+        <form class="search-form" id="searchForm" role="search" aria-label="站內搜尋">
+          <label class="visually-hidden" for="searchInput">搜尋健康主題</label>
+          <input
+            id="searchInput"
+            name="q"
+            type="search"
+            placeholder="搜尋症狀、主題、關鍵字"
+            autocomplete="off"
+          />
+          <button type="submit" class="primary-button">搜尋</button>
+        </form>
+
+        <button
+          type="button"
+          id="menuToggle"
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="primaryNav"
+          aria-label="切換導覽選單"
+        >
+          選單
+        </button>
+      </div>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="主導覽">
+        <div class="container">
+          <ul>
+            <li><a href="#">疾病症狀</a></li>
+            <li><a href="#">健康生活</a></li>
+            <li><a href="#">飲食營養</a></li>
+            <li><a href="#">減肥瘦身</a></li>
+            <li><a href="#">運動健身</a></li>
+            <li><a href="#">影音專區</a></li>
+            <li><a href="#">專家專欄</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content" class="container main-layout">
+      <section class="section-block" aria-labelledby="editor-title">
+        <div class="section-header">
+          <h2 id="editor-title">早安精選</h2>
+          <a href="#">更多精選</a>
+        </div>
+        <div class="editor-grid" id="editorPicks"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="trending-title">
+        <div class="section-header">
+          <h2 id="trending-title">熱門文章</h2>
+        </div>
+        <ol class="rank-list" id="trendingList"></ol>
+      </section>
+
+      <section class="section-block" aria-labelledby="latest-title">
+        <div class="section-header">
+          <h2 id="latest-title">最新文章</h2>
+          <a href="#">閱讀更多文章</a>
+        </div>
+        <div class="card-grid" id="latestGrid"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="video-title">
+        <div class="section-header">
+          <h2 id="video-title">人氣影音</h2>
+          <a href="#">觀看更多影片</a>
+        </div>
+        <div class="card-grid" id="videoGrid"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="shorts-title">
+        <div class="section-header">
+          <h2 id="shorts-title">早安短影音</h2>
+          <a href="#">訂閱頻道</a>
+        </div>
+        <div class="shorts-rail" id="shortsRail"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="campaign-title">
+        <div class="section-header">
+          <h2 id="campaign-title">活動專區</h2>
+        </div>
+        <div class="campaign-grid" id="campaignGrid"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="infographic-title">
+        <div class="section-header">
+          <h2 id="infographic-title">圖解健康</h2>
+          <a href="#">觀看更多圖片</a>
+        </div>
+        <div class="card-grid" id="infographicGrid"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="topic-title">
+        <div class="section-header">
+          <h2 id="topic-title">焦點專題</h2>
+          <a href="#">更多專題</a>
+        </div>
+        <div class="topic-grid" id="topicGrid"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="shop-title">
+        <div class="section-header">
+          <h2 id="shop-title">健康嚴選</h2>
+          <a href="#">前往商城</a>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+
+      <section class="section-block" aria-labelledby="keyword-title">
+        <div class="section-header">
+          <h2 id="keyword-title">健康熱搜字</h2>
+        </div>
+        <div class="keyword-cloud" id="keywordCloud"></div>
+      </section>
+
+      <section class="section-block newsletter" aria-labelledby="newsletter-title">
+        <div>
+          <h2 id="newsletter-title">訂閱電子報</h2>
+          <p>免費訂閱每日健康內容，掌握最新文章與影音。</p>
+        </div>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <label class="visually-hidden" for="newsletterEmail">電子郵件</label>
+          <input id="newsletterEmail" name="email" type="email" placeholder="you@example.com" required />
+          <button type="submit" class="primary-button">訂閱</button>
+          <p id="newsletterFeedback" class="form-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <section>
+          <h2>文章分類</h2>
+          <ul>
+            <li><a href="#">疾病症狀</a></li>
+            <li><a href="#">健康生活</a></li>
+            <li><a href="#">飲食營養</a></li>
+            <li><a href="#">運動健身</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>關於我們</h2>
+          <ul>
+            <li><a href="#">關於平台</a></li>
+            <li><a href="#">聯絡我們</a></li>
+            <li><a href="#">隱私與條款</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>追蹤我們</h2>
+          <ul class="social-list">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">LINE</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>客服資訊</h2>
+          <p>服務時間：週一至週五 08:30-17:30</p>
+          <p>客服專線：02-0000-0000</p>
+        </section>
+      </div>
+      <p class="copyright">© 2026 Health Daily. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

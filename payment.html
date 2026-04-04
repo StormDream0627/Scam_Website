@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>會員解鎖付款</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="payment.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#payment-main">跳到付款表單</a>
+
+    <header class="site-header">
+      <div class="utility-bar">
+        <div class="container utility-content">
+          <p>安全付款（示意環境）</p>
+          <div class="utility-actions" aria-label="付款頁快速入口">
+            <a class="text-button" href="index.html">首頁</a>
+            <a class="text-button" href="article.html">文章頁</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container header-main">
+        <a class="logo" href="index.html" aria-label="回首頁">Health Daily</a>
+        <div aria-hidden="true"></div>
+        <a class="primary-button" href="article.html" id="backToArticle">回文章頁</a>
+      </div>
+    </header>
+
+    <main id="payment-main" class="container article-layout">
+      <section class="article-shell payment-shell" aria-labelledby="paymentTitle">
+        <p class="card-badge">會員解鎖</p>
+        <h1 id="paymentTitle" class="article-title">解鎖完整健康文章</h1>
+        <p class="article-lead">請輸入電子郵件與信用卡資訊完成付款。此為仿真流程，請勿輸入真實信用卡資料。</p>
+
+        <div class="paywall-panel payment-summary" role="status" aria-live="polite">
+          <div>
+            <p class="paywall-price">每月方案：NT$99</p>
+            <p class="paywall-note">付款後可返回文章頁直接閱讀完整內容。</p>
+          </div>
+          <p id="targetArticle" class="paywall-note">目標文章：載入中</p>
+        </div>
+
+        <form id="paymentForm" class="payment-form" novalidate>
+          <div class="field-group">
+            <label for="paymentEmail">電子郵件</label>
+            <input id="paymentEmail" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="field-group">
+            <label for="cardholderName">持卡人姓名</label>
+            <input id="cardholderName" name="cardholderName" type="text" placeholder="王小明" required />
+          </div>
+
+          <div class="field-group">
+            <label for="cardNumber">信用卡卡號</label>
+            <input id="cardNumber" name="cardNumber" type="text" inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242" required />
+          </div>
+
+          <div class="payment-grid-two">
+            <div class="field-group">
+              <label for="expiry">到期日（MM/YY）</label>
+              <input id="expiry" name="expiry" type="text" inputmode="numeric" maxlength="5" placeholder="12/29" required />
+            </div>
+            <div class="field-group">
+              <label for="cvv">CVV</label>
+              <input id="cvv" name="cvv" type="password" inputmode="numeric" maxlength="4" placeholder="123" required />
+            </div>
+          </div>
+
+          <p class="paywall-note">為保護資料安全，系統僅儲存遮罩後卡號，不會儲存 CVV。</p>
+          <p id="paymentFeedback" class="form-feedback" role="status" aria-live="polite"></p>
+          <button type="submit" class="primary-button">確認付款並解鎖</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

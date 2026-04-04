@@ -1,0 +1,14 @@
+[
+  {
+    "email": "test.user@example.com",
+    "subscribedAt": "2026-04-04T09:46:06.723Z"
+  },
+  {
+    "email": "hallo@gmail.com",
+    "subscribedAt": "2026-04-04T09:55:37.228Z"
+  },
+  {
+    "email": "test123@gmail.com",
+    "subscribedAt": "2026-04-04T09:59:01.588Z"
+  }
+]
