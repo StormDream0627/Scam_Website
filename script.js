@@ -418,8 +418,9 @@ function setupEasterEgg() {
   trigger.type = "button";
   trigger.className = "easter-egg-trigger";
   trigger.setAttribute("aria-label", "隱藏彩蛋");
-  // 使用 window.location.origin 確保跨環境相容（本地、GitHub Pages、自訂域名）
-  const easterEggImageUrl = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/Art_Resourse/36d55e386b2da65ba290c40e7668d264.jpg`;
+  // 正確計算彩蛋圖片路徑：取得當前目錄再加上資源路徑
+  const pathDirectory = window.location.pathname.split('/').slice(0, -1).join('/');
+  const easterEggImageUrl = `${window.location.origin}${pathDirectory}/Art_Resourse/36d55e386b2da65ba290c40e7668d264.jpg`;
   trigger.innerHTML = `<img src="${easterEggImageUrl}" alt="" loading="lazy" decoding="async" />`;
 
   trigger.addEventListener("click", () => {
