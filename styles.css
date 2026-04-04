@@ -298,6 +298,18 @@ input[type="email"] {
   font-size: 0.92rem;
 }
 
+.art-story-card {
+  overflow: hidden;
+}
+
+.card-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
 .meta-row {
   display: flex;
   justify-content: space-between;
@@ -564,6 +576,35 @@ input[type="email"] {
   margin: 1.2rem 0 0;
   font-size: 0.88rem;
   color: #cedecc;
+}
+
+.easter-egg-trigger {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  padding: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.06;
+  filter: grayscale(1);
+  background: transparent;
+  z-index: 40;
+  transition: opacity 0.2s ease;
+}
+
+.easter-egg-trigger:hover,
+.easter-egg-trigger:focus-visible {
+  opacity: 0.75;
+}
+
+.easter-egg-trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 :focus-visible {

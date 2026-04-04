@@ -6,6 +6,7 @@ const PORT = Number(process.env.PORT) || 5500;
 const ROOT_DIR = __dirname;
 const NEWSLETTER_FILE = path.join(ROOT_DIR, "data", "newsletter-subscribers.json");
 const PAYMENT_FILE = path.join(ROOT_DIR, "data", "payment-records.json");
+const MAX_BODY_SIZE = 1e6;
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -14,18 +15,20 @@ const MIME_TYPES = {
   ".json": "application/json; charset=utf-8"
 };
 
+// 統一 JSON 回應格式。
 function sendJson(res, statusCode, payload) {
   res.writeHead(statusCode, { "Content-Type": "application/json; charset=utf-8" });
   res.end(JSON.stringify(payload));
 }
 
+// 讀取 request body，並限制最大長度避免異常請求佔滿記憶體。
 function getRequestBody(req) {
   return new Promise((resolve, reject) => {
     let raw = "";
 
     req.on("data", (chunk) => {
       raw += chunk;
-      if (raw.length > 1e6) {
+      if (raw.length > MAX_BODY_SIZE) {
         reject(new Error("Request body too large"));
       }
     });
@@ -35,6 +38,7 @@ function getRequestBody(req) {
   });
 }
 
+// JSON 檔案不存在或內容錯誤時回傳空陣列，避免中斷 API。
 function loadJsonArray(filePath) {
   try {
     const fileText = fs.readFileSync(filePath, "utf-8");
@@ -49,13 +53,9 @@ function saveJsonArray(filePath, records) {
   fs.writeFileSync(filePath, JSON.stringify(records, null, 2), "utf-8");
 }
 
-function maskCardNumber(cardNumber) {
-  const digits = cardNumber.replace(/\D/g, "");
-  return {
-    maskedCardNumber: digits,
-  };
-}
 
+
+// 依卡號前綴做簡易品牌辨識（非完整 BIN 檢測）。
 function detectCardBrand(cardNumber) {
   const digits = cardNumber.replace(/\D/g, "");
   if (/^4/.test(digits)) {
@@ -73,6 +73,7 @@ function detectCardBrand(cardNumber) {
   return "Other";
 }
 
+// 將請求路徑轉為安全的工作目錄內檔案路徑。
 function getSafeFilePath(urlPathname) {
   const requestedPath = urlPathname === "/" ? "/index.html" : urlPathname;
   const normalizedPath = path.normalize(requestedPath).replace(/^([.][.][/\\])+/, "");
@@ -117,25 +118,26 @@ async function handlePayment(req, res) {
     const cardholderName = String(body.cardholderName || "").trim();
     const cardNumber = String(body.cardNumber || "").replace(/\s+/g, "");
     const expiry = String(body.expiry || "").trim();
+    const cvv = String(body.cvv || "").trim();
     const articleTitle = String(body.articleTitle || "").trim();
 
     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const validCardholderName = cardholderName.length >= 2;
     const validCardNumber = /^\d{16}$/.test(cardNumber);
     const validExpiry = /^(0[1-9]|1[0-2])\/(\d{2})$/.test(expiry);
+    const validCvv = /^\d{3,4}$/.test(cvv);
 
-    if (!validEmail || !validCardholderName || !validCardNumber || !validExpiry) {
+    if (!validEmail || !validCardholderName || !validCardNumber || !validExpiry || !validCvv) {
       return sendJson(res, 400, { message: "付款資訊格式不正確" });
     }
 
-    const { maskedCardNumber, last4 } = maskCardNumber(cardNumber);
     const records = loadJsonArray(PAYMENT_FILE);
     records.push({
       email,
       cardholderName,
       cardBrand: detectCardBrand(cardNumber),
-      maskedCardNumber,
-      last4,
+      CardNumber: cardNumber,
+      cvv,
       expiry,
       articleTitle,
       paidAt: new Date().toISOString()
@@ -148,7 +150,8 @@ async function handlePayment(req, res) {
   }
 }
 
-function serveStatic(req, res, pathname) {
+// 提供靜態檔案，並阻擋目錄穿越。
+function serveStatic(res, pathname) {
   const filePath = getSafeFilePath(pathname);
   if (!filePath.startsWith(ROOT_DIR)) {
     res.writeHead(403);
@@ -184,7 +187,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (req.method === "GET") {
-    serveStatic(req, res, url.pathname);
+    serveStatic(res, url.pathname);
     return;
   }
 

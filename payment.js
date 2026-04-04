@@ -5,18 +5,21 @@ const expiryInput = document.querySelector("#expiry");
 const targetArticle = document.querySelector("#targetArticle");
 const backToArticle = document.querySelector("#backToArticle");
 
+// 付款頁從 query string 取得文章標題；若缺少則帶預設值。
 function getArticleTitle() {
   const params = new URLSearchParams(window.location.search);
   const title = params.get("title");
   return title && title.trim() ? title.trim() : "健康專題：打造可持續的日常習慣";
 }
 
+// 依 4 碼分組卡號，輸入時提升可讀性。
 function formatCardNumber(value) {
   const digits = value.replace(/\D/g, "").slice(0, 16);
   const chunks = digits.match(/.{1,4}/g) || [];
   return chunks.join(" ");
 }
 
+// 將 MMYY 自動格式化為 MM/YY。
 function formatExpiry(value) {
   const digits = value.replace(/\D/g, "").slice(0, 4);
   if (digits.length < 3) {
@@ -35,6 +38,7 @@ function setupInputFormatting() {
   });
 }
 
+// 成功付款後回到已解鎖的文章頁。
 function buildUnlockUrl(articleTitle) {
   const params = new URLSearchParams({
     title: articleTitle,
@@ -48,6 +52,7 @@ function initializeHeader(articleTitle) {
   backToArticle.href = buildUnlockUrl(articleTitle);
 }
 
+// 僅驗證格式，實際金流驗證仍應交由支付服務處理。
 function validatePaymentData(payload) {
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
   const validCardholderName = payload.cardholderName.trim().length >= 2;
@@ -102,6 +107,7 @@ async function handleSubmit(event) {
   }
 }
 
+// 付款頁初始化：設定抬頭資訊、輸入格式、提交事件。
 function initializePaymentPage() {
   const articleTitle = getArticleTitle();
   initializeHeader(articleTitle);

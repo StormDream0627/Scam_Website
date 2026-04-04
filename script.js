@@ -1,3 +1,4 @@
+// 首頁內容資料來源，集中管理方便後續替換成 API。
 const content = {
   editorPicks: [
     {
@@ -66,11 +67,49 @@ const content = {
       views: "19,430"
     }
   ],
-  shorts: [
-    { title: "1 分鐘肩頸放鬆", views: "12,890" },
-    { title: "站姿提踵訓練", views: "10,440" },
-    { title: "低糖早餐搭配", views: "9,760" },
-    { title: "午休護眼技巧", views: "8,112" }
+  artSpotlight: [
+    {
+      title: "名醫警告：這種早餐搭配恐讓血糖整天失控",
+      summary: "看似健康的組合其實藏有升糖陷阱，專家解析關鍵誤區。",
+      category: "飲食營養",
+      date: "2026-04-04",
+      image: "Art_Resourse/14531616733_66c7a0ef46_b.jpg"
+    },
+    {
+      title: "連三天熬夜後身體會發生什麼？結果比你想像更可怕",
+      summary: "從精神渙散到代謝紊亂，短期作息失衡的連鎖反應一次看懂。",
+      category: "健康生活",
+      date: "2026-04-04",
+      image: "Art_Resourse/20220202700118.jpg"
+    },
+    {
+      title: "每天都在做卻越做越傷：熱門健身動作錯誤排行曝光",
+      summary: "復健教練點出最常見代償動作，避免小痠痛變成大問題。",
+      category: "運動健身",
+      date: "2026-04-03",
+      image: "Art_Resourse/images3.jpg"
+    },
+    {
+      title: "醫師曝「沉默警訊」：這 3 個症狀可能不是單純疲勞",
+      summary: "忽略日常小異常可能錯過黃金檢查時機，先掌握自我檢測重點。",
+      category: "疾病症狀",
+      date: "2026-04-03",
+      image: "Art_Resourse/6293da64f8be085becb6385da3272fc2.jpg"
+    },
+    {
+      title: "早餐店最常點組合被點名：營養師說這樣吃脂肪飆最快",
+      summary: "同樣預算也能選到更穩定的能量組合，外食族必看替代清單。",
+      category: "減肥瘦身",
+      date: "2026-04-02",
+      image: "Art_Resourse/images1.jpg"
+    },
+    {
+      title: "久坐族驚覺下背痛惡化：原來不是椅子而是這習慣",
+      summary: "物理治療師提供可立即執行的 2 分鐘調整流程。",
+      category: "健康生活",
+      date: "2026-04-02",
+      image: "Art_Resourse/project_1_1.jpg"
+    }
   ],
   campaigns: [
     { title: "試用活動", summary: "體驗健康產品並填寫回饋。" },
@@ -120,6 +159,7 @@ const content = {
   ]
 };
 
+// 首頁會用到的 DOM 節點快取。
 const elements = {
   menuToggle: document.querySelector("#menuToggle"),
   primaryNav: document.querySelector("#primaryNav"),
@@ -132,7 +172,7 @@ const elements = {
   trendingList: document.querySelector("#trendingList"),
   latestGrid: document.querySelector("#latestGrid"),
   videoGrid: document.querySelector("#videoGrid"),
-  shortsRail: document.querySelector("#shortsRail"),
+  artGrid: document.querySelector("#artGrid"),
   campaignGrid: document.querySelector("#campaignGrid"),
   infographicGrid: document.querySelector("#infographicGrid"),
   topicGrid: document.querySelector("#topicGrid"),
@@ -214,23 +254,30 @@ function createSimpleCard(item, extra = "", isArticle = false) {
   return article;
 }
 
+function createArtStoryCard(item) {
+  const article = document.createElement("article");
+  article.className = "card art-story-card";
+  const url = articleUrl(item.title);
+  article.innerHTML = `
+    <a class="card-link-block" href="${url}" aria-label="閱讀圖文焦點：${item.title}">
+      <img class="card-cover" src="${item.image}" alt="${item.title}" loading="lazy" decoding="async" />
+      <span class="card-badge">${item.category}</span>
+      <h3>${item.title}</h3>
+      <p>${item.summary}</p>
+      <div class="meta-row">
+        <span>焦點報導</span>
+        <span>${item.date}</span>
+      </div>
+      <span class="card-link-cta">閱讀全文</span>
+    </a>
+  `;
+  return article;
+}
+
+// 通用網格渲染器，避免重複 append 迴圈。
 function renderCardGrid(target, items, mapper) {
   target.innerHTML = "";
   items.forEach((item) => target.append(mapper(item)));
-}
-
-function renderShorts(items) {
-  elements.shortsRail.innerHTML = "";
-  items.forEach((item) => {
-    const card = document.createElement("article");
-    card.className = "shorts-card";
-    card.innerHTML = `
-      <span class="card-badge">短影音</span>
-      <h3>${item.title}</h3>
-      <p>觀看數 ${item.views}</p>
-    `;
-    elements.shortsRail.append(card);
-  });
 }
 
 function renderCampaigns(items) {
@@ -291,7 +338,7 @@ function initializePage() {
   renderTrending(content.trending);
   renderCardGrid(elements.latestGrid, content.latest, (item) => createSimpleCard(item, "", true));
   renderCardGrid(elements.videoGrid, content.videos, (item) => createSimpleCard(item, '<span class="card-badge">人氣影音</span>'));
-  renderShorts(content.shorts);
+  renderCardGrid(elements.artGrid, content.artSpotlight, (item) => createArtStoryCard(item));
   renderCampaigns(content.campaigns);
   renderCardGrid(elements.infographicGrid, content.infographics, (item) => createSimpleCard(item, "", true));
   renderTopics(content.topics);
@@ -299,6 +346,7 @@ function initializePage() {
   renderKeywords(content.keywords);
 }
 
+// 手機版導覽收合控制。
 function setupNavigationToggle() {
   elements.menuToggle.addEventListener("click", () => {
     const isExpanded = elements.menuToggle.getAttribute("aria-expanded") === "true";
@@ -309,7 +357,7 @@ function setupNavigationToggle() {
 }
 
 function setupSearch() {
-  // 搜尋會同時過濾精選與最新文章，保留首頁瀏覽節奏。
+  // 搜尋同時過濾精選與最新文章，維持首頁閱讀節奏。
   elements.searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const keyword = elements.searchInput.value.trim().toLowerCase();
@@ -326,6 +374,7 @@ function setupSearch() {
   });
 }
 
+// 電子報提交：前端先做格式驗證，再呼叫後端 API。
 function setupNewsletterForm() {
   elements.newsletterForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -357,12 +406,30 @@ function setupNewsletterForm() {
       elements.newsletterForm.reset();
     } catch (error) {
       console.error("Newsletter save failed:", error);
-      elements.newsletterFeedback.textContent = "";
+      elements.newsletterFeedback.textContent = "訂閱失敗，請稍後再試。";
+      elements.newsletterFeedback.style.color = "#9b2a2a";
     }
   });
 }
 
+// 彩蛋使用極低可見度按鈕，避免影響主要版面。
+function setupEasterEgg() {
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "easter-egg-trigger";
+  trigger.setAttribute("aria-label", "隱藏彩蛋");
+  trigger.innerHTML = '<img src="Art_Resourse/36d55e386b2da65ba290c40e7668d264.jpg" alt="" loading="lazy" decoding="async" />';
+
+  trigger.addEventListener("click", () => {
+    window.alert("被你發現了我是航線玩家");
+  });
+
+  document.body.append(trigger);
+}
+
+// 啟動首頁互動。
 initializePage();
 setupNavigationToggle();
 setupSearch();
 setupNewsletterForm();
+setupEasterEgg();
