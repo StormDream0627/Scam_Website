@@ -18,11 +18,11 @@ const props = defineProps({
   }
 })
 
+const baseUrl = import.meta.env.BASE_URL
 function articleUrl(title) {
-  return `article.html?title=${encodeURIComponent(title)}`
+  return `${baseUrl}article.html?title=${encodeURIComponent(title)}`
 }
 
-const baseUrl = import.meta.env.BASE_URL
 function getImageUrl(path) {
   if (!path) return ''
   if (path.startsWith('http')) return path

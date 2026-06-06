@@ -41,7 +41,7 @@ const showEasterEgg = () => {
 
     <main id="main-content" class="container main-layout">
       <!-- Editor Picks -->
-      <BaseSection title="早安精選" titleId="editor-title" moreLink="#" moreText="更多精選">
+      <BaseSection title="早安精選" titleId="editor-title" moreLink="./article.html" moreText="更多精選">
         <div v-if="filteredEditorPicks.length" class="editor-grid">
           <ArticleCard :item="filteredEditorPicks[0]" variant="hero-card" />
           <div class="card-grid">
@@ -57,14 +57,14 @@ const showEasterEgg = () => {
       </BaseSection>
 
       <!-- Latest -->
-      <BaseSection title="最新文章" titleId="latest-title" moreLink="#" moreText="閱讀更多文章">
+      <BaseSection title="最新文章" titleId="latest-title" moreLink="./article.html" moreText="閱讀更多文章">
         <div class="card-grid">
           <ArticleCard v-for="(item, index) in filteredLatest" :key="index" :item="item" variant="none" />
         </div>
       </BaseSection>
 
       <!-- Videos -->
-      <BaseSection title="人氣影音" titleId="video-title" moreLink="#" moreText="觀看更多影片">
+      <BaseSection title="人氣影音" titleId="video-title" moreLink="./article.html" moreText="觀看更多影片">
         <div class="card-grid">
           <ArticleCard 
             v-for="(item, index) in content.videos" 
@@ -77,7 +77,7 @@ const showEasterEgg = () => {
       </BaseSection>
 
       <!-- Art Spotlight -->
-      <BaseSection title="爆點圖文焦點" titleId="art-title" moreLink="#" moreText="看更多爆點內容">
+      <BaseSection title="爆點圖文焦點" titleId="art-title" moreLink="./article.html" moreText="看更多爆點內容">
         <div class="card-grid">
           <ArticleCard 
             v-for="(item, index) in content.artSpotlight" 
@@ -94,19 +94,19 @@ const showEasterEgg = () => {
       </BaseSection>
 
       <!-- Infographics -->
-      <BaseSection title="圖解健康" titleId="infographic-title" moreLink="#" moreText="觀看更多圖片">
+      <BaseSection title="圖解健康" titleId="infographic-title" moreLink="./article.html" moreText="觀看更多圖片">
         <div class="card-grid">
           <ArticleCard v-for="(item, index) in content.infographics" :key="index" :item="item" variant="none" />
         </div>
       </BaseSection>
 
       <!-- Topics -->
-      <BaseSection title="焦點專題" titleId="topic-title" moreLink="#" moreText="更多專題">
+      <BaseSection title="焦點專題" titleId="topic-title" moreLink="./article.html" moreText="更多專題">
         <TopicGrid :items="content.topics" />
       </BaseSection>
 
       <!-- Products -->
-      <BaseSection title="健康嚴選" titleId="shop-title" moreLink="#" moreText="前往商城">
+      <BaseSection title="健康嚴選" titleId="shop-title" moreLink="./payment.html" moreText="前往商城">
         <ProductGrid :items="content.products" />
       </BaseSection>
 

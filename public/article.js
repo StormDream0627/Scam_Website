@@ -17,7 +17,8 @@ function hasUnlockAccess() {
 
 function paymentUrl(articleTitle) {
   const params = new URLSearchParams({ title: articleTitle });
-  return `payment.html?${params.toString()}`;
+  // 使用相對路徑確保在子目錄環境下正常運作
+  return `./payment.html?${params.toString()}`;
 }
 
 // 解除 paywall 顯示狀態，並停用解鎖按鈕。
