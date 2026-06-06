@@ -121,7 +121,7 @@ const showEasterEgg = () => {
     <AppFooter />
 
     <button type="button" class="easter-egg-trigger" aria-label="隱藏彩蛋" @click="showEasterEgg">
-      <img src="/Art_Resourse/36d55e386b2da65ba290c40e7668d264.jpg" alt="" loading="lazy" decoding="async" />
+      <img src="Art_Resourse/36d55e386b2da65ba290c40e7668d264.jpg" alt="" loading="lazy" decoding="async" />
     </button>
   </div>
 </template>

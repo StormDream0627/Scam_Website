@@ -28,7 +28,7 @@ const toggleNav = () => {
     </div>
 
     <div class="container header-main">
-      <a class="logo" href="/" aria-label="首頁">Health Daily</a>
+      <a class="logo" href="./" aria-label="首頁">Health Daily</a>
 
       <form class="search-form" id="searchForm" role="search" aria-label="站內搜尋" @submit.prevent="handleSearch">
         <label class="visually-hidden" for="searchInput">搜尋健康主題</label>
