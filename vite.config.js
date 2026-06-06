@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './', // 改為相對路徑，增加部署兼容性
+  base: '/Scam_Website/', // 改回絕對路徑，確保 GitHub Pages 子目錄正確
   plugins: [
     vue(),
     vueDevTools(),

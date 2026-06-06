@@ -21,6 +21,15 @@ const props = defineProps({
 function articleUrl(title) {
   return `article.html?title=${encodeURIComponent(title)}`
 }
+
+const baseUrl = import.meta.env.BASE_URL
+function getImageUrl(path) {
+  if (!path) return ''
+  if (path.startsWith('http')) return path
+  // 確保路徑不會重複包含 base
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  return `${baseUrl}${cleanPath}`
+}
 </script>
 
 <template>
@@ -40,7 +49,7 @@ function articleUrl(title) {
 
     <template v-else-if="variant === 'art-story-card'">
       <a class="card-link-block" :href="articleUrl(item.title)" :aria-label="'閱讀圖文焦點：' + item.title">
-        <img class="card-cover" :src="item.image" :alt="item.title" loading="lazy" decoding="async" />
+        <img class="card-cover" :src="getImageUrl(item.image)" :alt="item.title" loading="lazy" decoding="async" />
         <span class="card-badge">{{ item.category }}</span>
         <h3>{{ item.title }}</h3>
         <p>{{ item.summary }}</p>

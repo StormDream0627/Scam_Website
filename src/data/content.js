@@ -72,42 +72,42 @@ export const content = {
       summary: "看似健康的組合其實藏有升糖陷阱，專家解析關鍵誤區。",
       category: "飲食營養",
       date: "2026-04-04",
-      image: "Art_Resourse/14531616733_66c7a0ef46_b.jpg"
+      image: "/Art_Resourse/14531616733_66c7a0ef46_b.jpg"
     },
     {
       title: "連三天熬夜後身體會發生什麼？結果比你想像更可怕",
       summary: "從精神渙散到代謝紊亂，短期作息失衡的連鎖反應一次看懂。",
       category: "健康生活",
       date: "2026-04-04",
-      image: "Art_Resourse/20220202700118.jpg"
+      image: "/Art_Resourse/20220202700118.jpg"
     },
     {
       title: "每天都在做卻越做越傷：熱門健身動作錯誤排行曝光",
       summary: "復健教練點出最常見代償動作，避免小痠痛變成大問題。",
       category: "運動健身",
       date: "2026-04-03",
-      image: "Art_Resourse/images3.jpg"
+      image: "/Art_Resourse/images3.jpg"
     },
     {
       title: "醫師曝「沉默警訊」：這 3 個症狀可能不是單純疲勞",
       summary: "忽略日常小異常可能錯過黃金檢查時機，先掌握自我檢測重點。",
       category: "疾病症狀",
       date: "2026-04-03",
-      image: "Art_Resourse/6293da64f8be085becb6385da3272fc2.jpg"
+      image: "/Art_Resourse/6293da64f8be085becb6385da3272fc2.jpg"
     },
     {
       title: "早餐店最常點組合被點名：營養師說這樣吃脂肪飆最快",
       summary: "同樣預算也能選到更穩定的能量組合，外食族必看替代清單。",
       category: "減肥瘦身",
       date: "2026-04-02",
-      image: "Art_Resourse/images1.jpg"
+      image: "/Art_Resourse/images1.jpg"
     },
     {
       title: "久坐族驚覺下背痛惡化：原來不是椅子而是這習慣",
       summary: "物理治療師提供可立即執行的 2 分鐘調整流程。",
       category: "健康生活",
       date: "2026-04-02",
-      image: "Art_Resourse/project_1_1.jpg"
+      image: "/Art_Resourse/project_1_1.jpg"
     }
   ],
   campaigns: [
